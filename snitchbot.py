@@ -371,9 +371,9 @@ class Snitch(EternalClient):
             elif diff['log'] == 'create':
                 url = 'https://' + url + '.miraheze.org/wiki/Special:Log/newusers'
             elif diff['log'] == 'hit':
-                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/newusers'
+                url = 'https://' + url + '.miraheze.org/wiki/Special:AbuseLog?wpSearchWiki=' + wiki
             else:
-                url = 'https://' + url + '.miraheze.org/wiki/Special:AbuseLog/' + diff['log']
+                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/' + diff['log']
             self.msg(rule.channel, 'On %s \2%s\2 %s; %s'
                 % (wiki, diff['user'], diff['summary'], url))
 
