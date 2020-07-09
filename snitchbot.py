@@ -353,10 +353,8 @@ class Snitch(EternalClient):
             self.msg(rule.channel, '\2[[%s]]\2 on %s was edited by \2%s\2 with the following comment: %s Link: %s'
                 % (diff['page'], wiki, diff['user'], diff['summary'], diff['url'].replace('http://', 'https://')))
         else:
-            if diff['log'] == 'requestwiki':
-                url = 'https://meta.miraheze.org/wiki/Special:RequestWikiQueue'
-            elif diff['log'] == 'createwiki':
-                url = 'https://meta.miraheze.org/wiki/Special:RequestWikiQueue'
+            if diff['log'] == 'requestwiki' or diff['log'] == 'createwiki' or diff['log'] == 'requestwikiedit':
+                url = 'https://meta.miraheze.org/wiki/Special:Log/farmer'
             elif diff['log'] == 'unblock':
                 url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/block'
             elif diff['log'] == 'overwrite':
