@@ -323,7 +323,7 @@ class Snitch(EternalClient):
             if hostmask in settings.authorized_users:
                 self.msg(channel, 'Now restarting...')
                 log.msg('Got restart command. Running suicide script')
-                os.system('/data/project/xslack/mh-stream-beta/internal/suicide')
+                os.system('/srv/streambot/internal/suicide')
             else:
                 self.msg(channel, 'Permission denied. Login as an administrator to use this command.')
         elif action == 'quit':
