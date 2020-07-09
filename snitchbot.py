@@ -359,6 +359,8 @@ class Snitch(EternalClient):
                 url = 'https://meta.miraheze.org/wiki/Special:RequestWikiQueue'
             elif diff['log'] == 'unblock':
                 url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/block'
+            elif diff['log'] == 'overwrite':
+                url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/upload'
             else:
                 url = wiki.strip('wiki')
                 url = 'https://' + url + '.miraheze.org/wiki/Special:Log/' + diff['log']
