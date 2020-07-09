@@ -353,22 +353,24 @@ class Snitch(EternalClient):
             self.msg(rule.channel, '\2[[%s]]\2 on %s was edited by \2%s\2 with the following comment: %s Link: %s'
                 % (diff['page'], wiki, diff['user'], diff['summary'], diff['url'].replace('http://', 'https://')))
         else:
+            url = wiki.strip('wiki')
             if diff['log'] == 'requestwiki' or diff['log'] == 'createwiki' or diff['log'] == 'requestwikiedit':
-                url = 'https://meta.miraheze.org/wiki/Special:Log/farmer'
+                url = 'https://' + url + 'miraheze.org/wiki/Special:Log/farmer'
             elif diff['log'] == 'unblock':
-                url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/block'
+                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/block'
             elif diff['log'] == 'overwrite':
-                url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/upload'
+                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/upload'
             elif diff['log'] == 'gblock2':
-                url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/gblblock'
+                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/gblblock'
             elif diff['log'] == 'setstatus':
-                url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/globalauth'
+                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/globalauth'
             elif diff['log'] == 'thank':
-                url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/thanks'
+                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/thanks'
             elif diff['log'] == 'settings':
-                url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/managewiki'
+                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/managewiki'
+            elif diff['log'] == 'create':
+                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/createaccount'
             else:
-                url = wiki.strip('wiki')
                 url = 'https://' + url + '.miraheze.org/wiki/Special:Log/' + diff['log']
             self.msg(rule.channel, 'On %s \2%s\2 %s; %s'
                 % (wiki, diff['user'], diff['summary'], url))
