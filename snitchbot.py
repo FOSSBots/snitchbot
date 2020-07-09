@@ -359,6 +359,14 @@ class Snitch(EternalClient):
                 url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/block'
             elif diff['log'] == 'overwrite':
                 url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/upload'
+            elif diff['log'] == 'gblock2':
+                url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/gblblock'
+            elif diff['log'] == 'setstatus':
+                url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/globalauth'
+            elif diff['log'] == 'thank':
+                url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/thanks'
+            elif diff['log'] == 'settings':
+                url = 'https://' + wiki + '.miraheze.org/wiki/Special:Log/managewiki'
             else:
                 url = wiki.strip('wiki')
                 url = 'https://' + url + '.miraheze.org/wiki/Special:Log/' + diff['log']
