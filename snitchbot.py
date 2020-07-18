@@ -6,11 +6,12 @@ import re
 import sqlite3
 import sre_constants
 import os
+import time
 
 from twisted.internet import protocol, reactor, task
 from twisted.python import log
 from twisted.words.protocols import irc
-
+from threading import Thread
 import settings
 
 '''
@@ -64,6 +65,7 @@ class EternalClient(irc.IRCClient):
 
     def connectionLost(self, reason):
         irc.IRCClient.connectionLost(self, reason)
+        time.sleep(2)
         self.pingger.stop()
 
     def pingServer(self):
@@ -110,12 +112,16 @@ class Snatch(EternalClient):
         content = message.split(' ')
         wiki = content[0]
         cleaned_message = strip_formatting(message)
+        cleaned_message = str(cleaned_message, 'utf-8', 'ignore')
         edit_match = DIFF_RE.match(cleaned_message)
         action_match = ACTION_RE.match(cleaned_message)
         match = edit_match or action_match
         if not match:
-            log.msg('%s was not matched' % repr(cleaned_message))
-            log.msg('Wiki: %s Page: %s User: %s' % wiki)
+            try:
+                log.msg('%s was not matched' % repr(cleaned_message))
+                log.msg('Wiki: %s Page: %s User: %s' % wiki)
+            except:
+                return
             return
         diff = match.groupdict()
         self.cursor.execute(
@@ -156,7 +162,8 @@ class Snatch(EternalClient):
                 ignore.append(rule.channel)
             else:
                 for snitch in self.factory.snitches:
-                    snitch.tattle(rule, diff, wiki)
+                    sendthread = Thread(target=snitch.tattle,args=(rule, diff, wiki))
+                    sendthread.run()
                     ignore.append(rule.channel)
 
     def syncChannels(self):
@@ -398,6 +405,7 @@ class SnatchAndSnitch(protocol.ReconnectingClientFactory):
         if not cls.factories:
             cls.connection.commit()
             cls.connection.close()
+            time.sleep(2)
             reactor.stop()
 
 
