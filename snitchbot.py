@@ -111,8 +111,8 @@ class Snatch(EternalClient):
     def privmsg(self, user, channel, message):
         content = message.split(' ')
         wiki = content[0]
+        cleaned_message = message.encode().decode('utf-8', 'ignore')
         cleaned_message = strip_formatting(message)
-        cleaned_message = str(cleaned_message, 'utf-8', 'ignore')
         edit_match = DIFF_RE.match(cleaned_message)
         action_match = ACTION_RE.match(cleaned_message)
         match = edit_match or action_match
