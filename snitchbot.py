@@ -361,7 +361,7 @@ class Snitch(EternalClient):
                 % (diff['page'], wiki, diff['user'], diff['summary'], diff['url'].replace('http://', 'https://')))
         else:
             url = wiki.strip('wiki')
-            if diff['log'] == 'requestwiki' or diff['log'] == 'createwiki' or diff['log'] == 'requestwikiedit':
+            if diff['log'] == 'requestwiki' or diff['log'] == 'createwiki' or diff['log'] == 'requestwikiedit' or diff['log'] == 'requestaccept' or diff['log'] == 'requestdecline':
                 url = 'https://' + url + '.miraheze.org/wiki/Special:Log/farmer'
             elif diff['log'] == 'unblock':
                 url = 'https://' + url + '.miraheze.org/wiki/Special:Log/block'
