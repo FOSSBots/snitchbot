@@ -363,7 +363,7 @@ class Snitch(EternalClient):
             url = wiki.strip('wiki')
             if diff['log'] == 'requestwiki' or diff['log'] == 'createwiki' or diff['log'] == 'requestwikiedit' or diff['log'] == 'requestaccept' or diff['log'] == 'requestdecline':
                 url = 'https://' + url + '.miraheze.org/wiki/Special:Log/farmer'
-            elif diff['log'] == 'delete' or diff['log'] == 'delete-group' or diff['log'] == 'lock' or diff['log'] == 'settings' or diff['log'] == 'rename' or diff['log'] == 'rights' or diff['log'] == 'namespaces' or diff['log'] == 'namespaces-delete' or diff['log'] == 'undelete' or diff['log'] == 'unlock':
+            elif diff['log'] == 'delete-group' or diff['log'] == 'lock' or diff['log'] == 'settings' or diff['log'] == 'rename' or diff['log'] == 'namespaces' or diff['log'] == 'namespaces-delete' or diff['log'] == 'undelete' or diff['log'] == 'unlock':
                 url = 'https://' + url + '.miraheze.org/wiki/Special:Log/managewiki'
             elif diff['log'] == 'unblock':
                 url = 'https://' + url + '.miraheze.org/wiki/Special:Log/block'
