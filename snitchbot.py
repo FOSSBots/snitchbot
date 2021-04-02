@@ -38,7 +38,7 @@ def strip_formatting(message):
     """Strips colors and formatting from IRC messages"""
     return COLOR_RE.sub('', message)
 
-ACTION_RE = re.compile(r'(?P<wiki>.+) \[\[(.+)\]\] (?P<log>.+)  \* (?P<user>.+) \*  (?P<summary>.+)')
+ACTION_RE = re.compile(r'(?P<wiki>.+) \[\[(?P<loglink>.+)\]\] (?P<log>.+)  \* (?P<user>.+) \*  (?P<summary>.+)')
 
 DIFF_RE = re.compile(r'''
     (?P<wiki>.*)
@@ -361,26 +361,7 @@ class Snitch(EternalClient):
                 % (diff['page'], wiki, diff['user'], diff['summary'], diff['url'].replace('http://', 'https://')))
         else:
             url = wiki.strip('wiki')
-            if diff['log'] == 'requestwiki' or diff['log'] == 'createwiki' or diff['log'] == 'requestwikiedit' or diff['log'] == 'requestaccept' or diff['log'] == 'requestdecline':
-                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/farmer'
-            elif diff['log'] == 'unblock':
-                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/block'
-            elif diff['log'] == 'overwrite':
-                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/upload'
-            elif diff['log'] == 'gblock2':
-                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/gblblock'
-            elif diff['log'] == 'setstatus':
-                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/globalauth'
-            elif diff['log'] == 'thank':
-                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/thanks'
-            elif diff['log'] == 'settings':
-                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/managewiki'
-            elif diff['log'] == 'create':
-                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/newusers'
-            elif diff['log'] == 'hit':
-                url = 'https://' + url + '.miraheze.org/wiki/Special:AbuseLog?wpSearchWiki=' + wiki
-            else:
-                url = 'https://' + url + '.miraheze.org/wiki/Special:Log/' + diff['log']
+            url = 'https://' + url + '.miraheze.org/wiki/' + diff['loglink']
             self.msg(rule.channel, 'On %s \2%s\2 %s; %s'
                 % (wiki, diff['user'], diff['summary'], url))
 
