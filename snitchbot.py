@@ -7,6 +7,8 @@ import sqlite3
 import sre_constants
 import os
 import time
+import sys
+import trace
 
 from twisted.internet import protocol, reactor, task
 from twisted.python import log
