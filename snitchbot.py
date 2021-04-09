@@ -101,7 +101,7 @@ class Snatch(EternalClient):
         self.syncChannels()
 
     def joined(self, channel):
-        log.msg('Snatch joined %s' % channel)
+        print('Snatch joined %s' % channel)
         self.channels.add(channel)
 
     def left(self, channel):
@@ -401,4 +401,8 @@ def main():
     reactor.run()
 
 if __name__ == '__main__':
-    main()
+    tracer = trace.Trace(
+    ignoredirs=[sys.prefix, sys.exec_prefix],
+    trace=1,
+    count=0)
+    tracer.run(main())
