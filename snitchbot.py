@@ -172,7 +172,7 @@ class Snatch(EternalClient):
         log.msg('Syncing snatch\'s channels')
         self.cursor.execute(
             'SELECT wiki FROM rules')
-        channels = set('#miraheze-feed')
+        channels = set(['#miraheze-feed'])
         [self.join(channel) for channel in (channels - self.channels)]
         [self.part(channel) for channel in (self.channels - channels)]
 
