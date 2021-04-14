@@ -391,7 +391,7 @@ class SnatchAndSnitch(protocol.ReconnectingClientFactory):
 
 
 def main():
-    log.startLogging(open('snitch.log', 'w'))
+    log.startLogging(open('/srv/streambot/snitch.log', 'w'))
     snatch = SnatchAndSnitch()
     snatch.protocol = Snatch
     snitch = SnatchAndSnitch()
