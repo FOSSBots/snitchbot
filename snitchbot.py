@@ -396,8 +396,8 @@ def main():
     snatch.protocol = Snatch
     snitch = SnatchAndSnitch()
     snitch.protocol = Snitch
-    reactor.connectTCP(settings.snatch_network, 6667, snatch)
-    reactor.connectTCP(settings.snitch_network, 6667, snitch)
+    reactor.connectTCP(settings.snatch_network, 6667, snatch, bindAddress='::')
+    reactor.connectTCP(settings.snitch_network, 6667, snitch, bindAddress='::')
     reactor.run()
 
 if __name__ == '__main__':
