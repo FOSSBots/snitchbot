@@ -80,7 +80,7 @@ class EternalClient(irc.IRCClient):
 class Snatch(EternalClient):
     realname = 'Recent Changes'
     nickname = 'StreamBot-read'
-    password = ':ZppixBot %s' % (settings.nickserv_password)
+    password = ':MirahezeBot %s' % (settings.nickserv_password)
 
     def connectionMade(self):
         EternalClient.connectionMade(self)
@@ -183,7 +183,7 @@ class Snatch(EternalClient):
 class Snitch(EternalClient):
     realname = 'Recent Changes'
     nickname = '%s' % (settings.nickname)
-    password = ':ZppixBot %s' % (settings.nickserv_password)
+    password = ':MirahezeBot %s' % (settings.nickserv_password)
     lineRate = 1
 
     def connectionMade(self):
