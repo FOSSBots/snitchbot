@@ -8,7 +8,7 @@ import sre_constants
 import os
 import time
 
-from twisted.internet import protocol, reactor, task
+from twisted.internet import protocol, reactor, task, ssl
 from twisted.python import log
 from twisted.words.protocols import irc
 from threading import Thread
