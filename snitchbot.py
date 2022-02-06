@@ -373,6 +373,9 @@ class SnatchAndSnitch(protocol.ReconnectingClientFactory):
     snitches = []
     connection = None
 
+    def clientConnectionFailed(self, connector, reason):
+        log.msg(reason.value)
+
     @classmethod
     def startFactory(cls):
         if not cls.factories:
