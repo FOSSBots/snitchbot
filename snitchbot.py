@@ -7,8 +7,6 @@ import sqlite3
 import sre_constants
 import os
 import time
-import sys
-import trace
 
 from twisted.internet import protocol, reactor, task, ssl
 from twisted.python import log
@@ -403,8 +401,4 @@ def main():
     reactor.run()
 
 if __name__ == '__main__':
-    tracer = trace.Trace(
-    ignoredirs=[sys.prefix, sys.exec_prefix],
-    trace=1,
-    count=0)
-    tracer.run(main())
+    main()
